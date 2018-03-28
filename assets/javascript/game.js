@@ -16,9 +16,9 @@ const wordBank = {
 
 let wins = 0;
 let losses = 0;
+let currentWord = "";
 let guessesLeft = 0;
 let lettersGuessed = [];
-let currentWord = "";
 let splitArr = [];
 let dashArr = [];
 let displayWord = "";
@@ -31,11 +31,15 @@ function renderGame() {
     currentWord = wordArray[Math.floor(Math.random() * 10)]
     console.log("currentWord", currentWord);
 
+    guessesLeft = currentWord.length + 3;
+    console.log("guessesLeft", guessesLeft);
+
     lettersGuessed = [];
     console.log("lettersGuessed", lettersGuessed);
+    dashArr = [];
+    
 
-    guessesLeft = currentWord.length + 5;
-    console.log("guessesLeft", guessesLeft);
+    
 
     splitArr = currentWord.toLowerCase().split('');
     console.log("splitArr", splitArr);
@@ -44,7 +48,7 @@ function renderGame() {
     // Check for spaces
     splitArr.map(index => {
         if (index === " ") {
-            dashArr.push(index);
+            dashArr.push('   ');
         }
 
         else {
@@ -57,6 +61,13 @@ function renderGame() {
     displayWord = dashArr.join('');
 
     console.log("displayWord", displayWord);
+
+    document.querySelector("#display-word").innerHTML = displayWord.toUpperCase();
+    document.querySelector("#display-wins").innerHTML = wins;
+    document.querySelector("#display-losses").innerHTML = losses;
+    document.querySelector("#display-guesses-left").innerHTML = guessesLeft;
+    
+   
 
 
 }
@@ -96,24 +107,22 @@ document.onkeyup = function (event) {
 
             if (guessesLeft === 0) {
                 console.log("You lose");
-                losses--;
+                losses++;
                 renderGame();
             }
 
 
         }
 
-        console.log()
-
-        // if (splitArr.indexOf(letter)) {
-        //   dashArr.splice()
-        // } else {
-
-        // }
 
         console.log("dashArr after guess:", dashArr);
         console.log("Guesses Left:", guessesLeft);
         console.log("Letters Guessed:", lettersGuessed);
+
+        displayWord = dashArr.join('');
+        document.querySelector("#display-word").innerHTML = displayWord.toUpperCase();
+        document.querySelector("#display-guesses-left").innerHTML = guessesLeft;
+        document.querySelector("#display-letters-guessed").innerHTML = lettersGuessed.join(' ').toUpperCase();
 
     }
 }

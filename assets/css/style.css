@@ -1,0 +1,8 @@
+body {
+    background: rgb(6, 182, 226)
+}
+
+.col {
+    border-width: 10px;
+    border-color: black;
+}
