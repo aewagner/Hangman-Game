@@ -14,8 +14,8 @@ const wordBank = {
     w10: "The Lich"
 }
 
-let correct = 0;
-let wrong = 0;
+let wins = 0;
+let losses = 0;
 let guessesLeft = 0;
 let lettersGuessed = [];
 let currentWord = "";
@@ -27,33 +27,36 @@ let wordArray = [wordBank.w1, wordBank.w2, wordBank.w3, wordBank.w4, wordBank.w5
 //Game setup
 console.log("currentWord", currentWord);
 function renderGame() {
- // Set a random word    
- currentWord = wordArray[Math.floor(Math.random() * 10)]
- console.log("currentWord", currentWord);
+    // Set a random word    
+    currentWord = wordArray[Math.floor(Math.random() * 10)]
+    console.log("currentWord", currentWord);
 
- guessesLeft = currentWord.length + 5;
- console.log("guessesLeft", guessesLeft);
+    lettersGuessed = [];
+    console.log("lettersGuessed", lettersGuessed);
 
-splitArr = currentWord.toLowerCase().split('');
-console.log("splitArr", splitArr);
+    guessesLeft = currentWord.length + 5;
+    console.log("guessesLeft", guessesLeft);
 
-// Check the length of word and render dashes
-// Check for spaces
-splitArr.map(index => {
-    if (index === " ") {
-        dashArr.push(index);
-    }
+    splitArr = currentWord.toLowerCase().split('');
+    console.log("splitArr", splitArr);
 
-    else {
-        dashArr.push(' - ');
-    }
-})
+    // Check the length of word and render dashes
+    // Check for spaces
+    splitArr.map(index => {
+        if (index === " ") {
+            dashArr.push(index);
+        }
 
-console.log("dashArr", dashArr);
+        else {
+            dashArr.push(' - ');
+        }
+    })
 
-displayWord = dashArr.join('');
+    console.log("dashArr", dashArr);
 
-console.log("displayWord", displayWord);
+    displayWord = dashArr.join('');
+
+    console.log("displayWord", displayWord);
 
 
 }
@@ -62,55 +65,58 @@ console.log("displayWord", displayWord);
 
 
 //Create event listener
-document.onkeyup = function(event) {
-  
+document.onkeyup = function (event) {
+
     // Captures the key press, converts it to lowercase, and saves it to a variable.
     let letter = String.fromCharCode(event.keyCode).toLowerCase();
     console.log(letter);
     console.log("splitArr after event", splitArr);
 
-    //Check for letter
-    // if (splitArr.indexOf(letter)) {
+    if (/[a-z]/.test(letter)) {
+        //Check for letter
+        // if (splitArr.indexOf(letter)) {
         console.log("TRUE");
         for (let i = 0; i < splitArr.length; i++) {
             if (splitArr[i] === letter) {
-            dashArr.splice( i, 1, letter);
+                dashArr.splice(i, 1, letter);
             }
         }
-    // } 
+        // } 
 
-    if (dashArr.indexOf(' - ') === -1) {
-        console.log("Yay! You win");
-        renderGame();
-    }
-    
-    if (splitArr.indexOf(letter) === -1) {
-        console.log("False")
-        guessesLeft--;
-        lettersGuessed.push(letter);
-
-        if (guessesLeft === 0) {
-            console.log("You lose");
+        if (dashArr.indexOf(' - ') === -1) {
+            console.log("Yay! You win");
+            wins++;
             renderGame();
         }
 
+        if (splitArr.indexOf(letter) === -1 && lettersGuessed.indexOf(letter) === -1) {
+            console.log("False")
+            guessesLeft--;
+            lettersGuessed.push(letter);
+
+            if (guessesLeft === 0) {
+                console.log("You lose");
+                losses--;
+                renderGame();
+            }
+
+
+        }
+
+        console.log()
+
+        // if (splitArr.indexOf(letter)) {
+        //   dashArr.splice()
+        // } else {
+
+        // }
+
+        console.log("dashArr after guess:", dashArr);
+        console.log("Guesses Left:", guessesLeft);
+        console.log("Letters Guessed:", lettersGuessed);
 
     }
-
-    console.log()
-
-    // if (splitArr.indexOf(letter)) {
-    //   dashArr.splice()
-    // } else {
-      
-    // }
-
-    console.log("dashArr after guess:", dashArr);
-    console.log("Guesses Left:", guessesLeft);
-    console.log("Letters Guessed:", lettersGuessed);
-
-  }
-
+}
 
 
 
