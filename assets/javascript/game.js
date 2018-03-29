@@ -2,7 +2,7 @@
 
 //Create Word Bank
 const wordBank = {
-    w1: ["Finn", "./assets/images/finn.png"],
+    w1: ["Finn", "./assets/images/Finn.png"],
     w2: ["Jake", "./assets/images/jake.png"],
     w3: ["Princess Bubblegum", "./assets/images/pbg.png"],
     w4: ["Marceline the Vampire Queen", "./assets/images/marceline.png"],
