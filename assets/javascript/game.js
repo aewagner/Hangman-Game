@@ -3,15 +3,15 @@
 //Create Word Bank
 const wordBank = {
     w1: ["Finn", "./assets/images/finn.png"],
-    w2: ["Jake", "./assets/images/finn.png"],
-    w3: ["Princess Bubblegum", "./assets/images/finn.png"],
-    w4: ["Marceline the Vampire Queen", "./assets/images/finn.png"],
-    w5: ["BMO", "./assets/images/finn.png"],
-    w6: ["Lemongrab", "./assets/images/finn.png"],
-    w7: ["Ice King", "./assets/images/finn.png"],
-    w8: ["Magic Man", "./assets/images/finn.png"],
-    w9: ["Prismo", "./assets/images/finn.png"],
-    w10: ["The Lich", "./assets/images/finn.png"]
+    w2: ["Jake", "./assets/images/jake.png"],
+    w3: ["Princess Bubblegum", "./assets/images/pbg.png"],
+    w4: ["Marceline the Vampire Queen", "./assets/images/marceline.png"],
+    w5: ["BMO", "./assets/images/bmo.png"],
+    w6: ["Lemongrab", "./assets/images/lemongrab.png"],
+    w7: ["Ice King", "./assets/images/simon.png"],
+    w8: ["Magic Man", "./assets/images/magicman.png"],
+    w9: ["Prismo", "./assets/images/prismo2.png"],
+    w10: ["The Lich", "./assets/images/lich.png"]
 }
 
 let wins = 0;
@@ -34,8 +34,12 @@ function renderGame() {
     currentWord = wordArray[randomNumber][0];
     console.log("currentWord", currentWord);
 
+    if (currentWord.length < 5) {
     guessesLeft = currentWord.length + 3;
     console.log("guessesLeft", guessesLeft);
+    } else {
+        guessesLeft = 8;
+    }
 
     lettersGuessed = [];
     console.log("lettersGuessed", lettersGuessed);
@@ -55,7 +59,7 @@ function renderGame() {
         }
 
         else {
-            dashArr.push(' - ');
+            dashArr.push('-');
         }
     })
 
@@ -69,7 +73,8 @@ function renderGame() {
     document.querySelector("#display-wins").innerHTML = wins;
     document.querySelector("#display-losses").innerHTML = losses;
     document.querySelector("#display-guesses-left").innerHTML = guessesLeft;
-
+    document.querySelector("#display-image").src = "./assets/images/finnandjake.png";
+    document.querySelector("#display-letters-guessed").innerHTML = lettersGuessed;
 
 
 
@@ -97,10 +102,11 @@ document.onkeyup = function (event) {
         }
         // } 
 
-        if (dashArr.indexOf(' - ') === -1) {
+        if (dashArr.indexOf('-') === -1) {
             console.log("Yay! You win");
             wins++;
             document.querySelector("#display-image").src = wordArray[randomNumber][1];
+            document.querySelector("#instructions").innerHTML = "Press Enter To Start A New Game" ;
         }
 
         if (splitArr.indexOf(letter) === -1 && lettersGuessed.indexOf(letter) === -1) {
@@ -127,6 +133,10 @@ document.onkeyup = function (event) {
         document.querySelector("#display-guesses-left").innerHTML = guessesLeft;
         document.querySelector("#display-letters-guessed").innerHTML = lettersGuessed.join(' ').toUpperCase();
 
+    }
+
+    if (event.keyCode === 13 && dashArr.indexOf(' - ') === -1) {
+        renderGame();
     }
 }
 
