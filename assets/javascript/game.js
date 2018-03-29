@@ -75,6 +75,7 @@ function renderGame() {
     document.querySelector("#display-guesses-left").innerHTML = guessesLeft;
     document.querySelector("#display-image").src = "./assets/images/finnandjake.png";
     document.querySelector("#display-letters-guessed").innerHTML = lettersGuessed;
+    document.querySelector("#instructions").innerHTML = "Press Any Key To Get Started!" ;
 
 
 
@@ -106,7 +107,7 @@ document.onkeyup = function (event) {
             console.log("Yay! You win");
             wins++;
             document.querySelector("#display-image").src = wordArray[randomNumber][1];
-            document.querySelector("#instructions").innerHTML = "Press Enter To Start A New Game" ;
+            document.querySelector("#instructions").innerHTML = "Press Enter To Start A New Game";
         }
 
         if (splitArr.indexOf(letter) === -1 && lettersGuessed.indexOf(letter) === -1) {
