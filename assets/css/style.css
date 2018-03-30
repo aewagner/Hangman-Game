@@ -31,3 +31,7 @@ body {
     margin-bottom: 2rem;
     max-height: 25rem;
 }
+
+#instructions {
+    margin-bottom: 3rem;
+}
