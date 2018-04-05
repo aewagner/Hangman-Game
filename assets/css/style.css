@@ -1,5 +1,5 @@
 body {
-    background: rgb(19, 161, 0);
+    background: rgb(22, 179, 252);
     background-image: url(../images/ooo3.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -34,4 +34,14 @@ body {
 
 #instructions {
     margin-bottom: 3rem;
+}
+
+#openKeyboard {
+    margin-top: 1.5rem;
+}
+
+@media only screen and (min-width: 812px) {
+    #openKeyboard {
+        display: none;
+    }
 }
